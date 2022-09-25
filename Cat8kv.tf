@@ -23,7 +23,7 @@ data "vsphere_host" "host" {
 resource "vsphere_virtual_machine" "cat8k" {
   name             = "cat8k"
   resource_pool_id = data.vsphere_host.host.resource_pool_id
-  datacenter_id    = data.vsphere_datacenter.datacenter.id
+  ##datacenter_id    = data.vsphere_datacenter.datacenter.id
   host_system_id   = data.vsphere_host.host.id
   ##datastore_id     = data.vsphere_datastore.datastore.id
   guest_id         = "other3xLinux64Guest"

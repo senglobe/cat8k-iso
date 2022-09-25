@@ -25,16 +25,18 @@ resource "vsphere_virtual_machine" "cat8k" {
   resource_pool_id = data.vsphere_host.host.resource_pool_id
   datacenter_id    = data.vsphere_datacenter.datacenter.id
   host_system_id   = data.vsphere_host.host.id
-  datastore_id     = data.vsphere_datastore.datastore.id
+  ##datastore_id     = data.vsphere_datastore.datastore.id
   guest_id         = "other3xLinux64Guest"
-  
-  ovf_deploy {
-    allow_unverified_ssl_cert = true
-    remote_ovf_url            = "http://10.105.192.184:8000/c8000v-universalk9.17.06.03a.ova"
-    disk_provisioning         = "thick"
-    ip_protocol               = "IPV4"
-    ip_allocation_policy      = "STATIC_MANUAL"
+  num_cpus         = 4
+  memory           = 4096
+  disk {
+    label = "disk0"
+    size = "16"
   }
+  cdrom {
+    client_device = "iso/c8000v-universalk9.17.06.03a.iso"
+  }
+
 
 
 }

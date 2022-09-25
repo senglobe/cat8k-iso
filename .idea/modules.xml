@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Cat8k-temp.iml" filepath="$PROJECT_DIR$/.idea/Cat8k-temp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/cat8k-iso.iml" filepath="$PROJECT_DIR$/.idea/cat8k-iso.iml" />
     </modules>
   </component>
 </project>

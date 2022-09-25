@@ -1,0 +1,25 @@
+POD1:
+  - dstore : ESXi-POD1
+  - host   : 172.16.11.13
+  - R1     : 8kv_F1
+  - R1     : 8kv_F2
+POD2:
+  - dstore : ESXi-POD2
+  - host   : 172.16.21.13
+  - R1     : 8kv_F1
+  - R1     : 8kv_F2
+POD3:
+  - dstore : ESXi-POD3
+  - host   : 172.16.31.13
+  - R1     : 8kv_F1
+  - R1     : 8kv_F2
+POD4:
+  - dstore : ESXi-POD4
+  - host   : 172.16.41.13
+  - R1     : 8kv_F1
+  - R1     : 8kv_F2
+POD5:
+  - dstore : ESXi-POD5
+  - host   : 172.16.51.13
+  - R1     : 8kv_F1
+  - R1     : 8kv_F2

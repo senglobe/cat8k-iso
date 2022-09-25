@@ -37,6 +37,10 @@ resource "vsphere_virtual_machine" "cat8k" {
     client_device = true
   }
 
+  network_interface {
+    network_id = "vmware"
+  }
+
 
 
 }

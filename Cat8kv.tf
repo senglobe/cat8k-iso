@@ -19,6 +19,10 @@ data "vsphere_host" "host" {
   datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
+data "vsphere_network" "network1" {
+  name          = "VM Network"
+  datacenter_id = data.vsphere_datacenter.datacenter.id
+}
 
 resource "vsphere_virtual_machine" "cat8k" {
   name             = "cat8k"
@@ -38,7 +42,7 @@ resource "vsphere_virtual_machine" "cat8k" {
   }
 
   network_interface {
-    network_id = "VM Network"
+    network_id = data.vsphere_network.network1.id
   }
 
 

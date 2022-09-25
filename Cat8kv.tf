@@ -34,7 +34,7 @@ resource "vsphere_virtual_machine" "cat8k" {
     size = "16"
   }
   cdrom {
-    client_device = "iso/c8000v-universalk9.17.06.03a.iso"
+    client_device = "/iso/c8000v-universalk9.17.06.03a.iso"
   }
 
 

@@ -38,13 +38,13 @@ resource "vsphere_virtual_machine" "cat8k" {
     size = "16"
   }
   cdrom {
-    client_device = true
-  }
+    datastore_id = data.vsphere_datastore.datastore.id
+    path         = "/iso/c8000v-universalk9.17.06.03a,iso"
+ }
 
   network_interface {
     network_id = data.vsphere_network.network1.id
   }
-
 
 
 }

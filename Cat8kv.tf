@@ -27,6 +27,12 @@ data "vsphere_network" "network3" {
   datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
+resource "vsphere_file"  {
+  datacenter = data.vsphere_datacenter.datacenter.id
+  datastore        = data.vsphere_datastore.datastore.id
+  destination_file = "/config.iso"
+  source_file      = var.day0
+}
 
 resource "vsphere_virtual_machine" "cat8k" {
   name             = var.hostname
@@ -40,11 +46,12 @@ resource "vsphere_virtual_machine" "cat8k" {
     label = "disk0"
     size = "16"
   }
+  /*
   disk {
     label = "disk1"
     path = var.day0
   }
-
+*/
   cdrom {
     datastore_id = data.vsphere_datastore.datastore.id
     path         = var.iso

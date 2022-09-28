@@ -1,33 +1,36 @@
-provider "vsphere" {
-  user                 = "administrator@vsphere.local"
-  password             = "C!sc0lab@123"
-  vsphere_server       = "10.105.192.183"
-  allow_unverified_ssl = true
-}
-
 data "vsphere_datacenter" "datacenter" {
-  name = "SDA-SPARSHA"
-}
-
-data "vsphere_datastore" "datastore" {
-  name          = "ESXi-POD5"
-  datacenter_id = data.vsphere_datacenter.datacenter.id
+  name = var.datacenter
 }
 
 data "vsphere_host" "host" {
-  name          = "172.16.51.13"
+  name          = var.host
+  datacenter_id = data.vsphere_datacenter.datacenter.id
+}
+
+data "vsphere_datastore" "datastore" {
+  name          = var.datastore
   datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
 data "vsphere_network" "network1" {
-  name          = "VM Network"
+  name          = var.int1
   datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
+data "vsphere_network" "network2" {
+  name          = var.int2
+  datacenter_id = data.vsphere_datacenter.datacenter.id
+}
+
+data "vsphere_network" "network3" {
+  name          = var.int3
+  datacenter_id = data.vsphere_datacenter.datacenter.id
+}
+
+
 resource "vsphere_virtual_machine" "cat8k" {
-  name             = "cat8k"
+  name             = var.hostname
   resource_pool_id = data.vsphere_host.host.resource_pool_id
-  ##datacenter_id    = data.vsphere_datacenter.datacenter.id
   host_system_id   = data.vsphere_host.host.id
   datastore_id     = data.vsphere_datastore.datastore.id
   guest_id         = "other3xLinux64Guest"
@@ -37,14 +40,24 @@ resource "vsphere_virtual_machine" "cat8k" {
     label = "disk0"
     size = "16"
   }
+  disk {
+    label = "disk1"
+    path = var.day0
+  }
+
   cdrom {
     datastore_id = data.vsphere_datastore.datastore.id
-    path         = "/iso/c8000v-universalk9.17.06.03a.iso"
+    path         = var.iso
  }
 
   network_interface {
     network_id = data.vsphere_network.network1.id
   }
-
-
+  network_interface {
+    network_id = data.vsphere_network.network2.id
+  }
+  network_interface {
+    network_id = data.vsphere_network.network3.id
+  }
+  wait_for_guest_net_timeout = -1
 }
